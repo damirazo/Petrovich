@@ -6,14 +6,14 @@ __author__ = 'damirazo <me@damirazo.ru>'
 
 setup(
     name='Petrovich',
-    version='0.1',
+    version='0.1.1',
     description=u'Библиотека для склонения кириллических ФИО к нужному падежу',
     url='https://github.com/damirazo/petrovich',
     author='damirazo',
     author_email='me@damirazo.ru',
     license='MIT',
     classifiers=[
-        'Development Status :: 5',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Localization',
         'License :: OSI Approved :: MIT License',
