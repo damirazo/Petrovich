@@ -25,73 +25,77 @@ class Petrovich(object):
         self.data = json.load(fp)
         fp.close()
 
-    def firstname(self, value, case):
+    def firstname(self, value, case, gender = 'androgynous'):
         u"""
         Склонение имени
 
         :param value: Значение для склонения
         :param case: Падеж для склонения (значение из класса Case)
+        :param gender: Грамматический род
         """
         if not value:
             raise ValueError('Firstname cannot be empty.')
 
-        return self.__inflect(value, case, 'firstname')
+        return self.__inflect(value, case, 'firstname', gender)
 
-    def lastname(self, value, case):
+    def lastname(self, value, case, gender = 'androgynous'):
         u"""
         Склонение фамилии
 
         :param value: Значение для склонения
         :param case: Падеж для склонения (значение из класса Case)
+        :param gender: Грамматический род
         """
         if not value:
             raise ValueError('Lastname cannot be empty.')
 
-        return self.__inflect(value, case, 'lastname')
+        return self.__inflect(value, case, 'lastname', gender)
 
-    def middlename(self, value, case):
+    def middlename(self, value, case, gender = 'androgynous'):
         u"""
         Склонение отчества
 
         :param value: Значение для склонения
         :param case: Падеж для склонения (значение из класса Case)
+        :param gender: Грамматический род
         """
         if not value:
             raise ValueError('Middlename cannot be empty.')
 
-        return self.__inflect(value, case, 'middlename')
+        return self.__inflect(value, case, 'middlename', gender)
 
-    def __inflect(self, value, case, name_form):
-        excludes = self.__check_excludes(value, case, name_form)
+    def __inflect(self, value, case, name_form, gender = 'androgynous'):
+        excludes = self.__check_excludes(value, case, name_form, gender)
         if excludes:
             return excludes
 
-        if value.count('-') > 0:
+        if (value.count('-') > 0) and (name_form != 'middlename'):
             value_segments = value.split(u'-')
             result = u''
 
             for segment in value_segments:
-                result += self.__find_rules(segment, case, name_form)
+                result += self.__find_rules(segment, case, name_form, gender)
 
             return result[:len(result) - 1]
 
         else:
-            return self.__find_rules(value, case, name_form)
+            return self.__find_rules(value, case, name_form, gender)
 
-    def __find_rules(self, name, case, name_form):
+    def __find_rules(self, name, case, name_form, gender = 'androgynous'):
         for rule in self.data[name_form]['suffixes']:
-            for char in rule['test']:
-                last_char = name[len(name) - len(char): len(name)]
+            if (rule['gender'] == gender) or (rule['gender'] == 'androgynous'):
+                for char in rule['test']:
+                    last_char = name[len(name) - len(char): len(name)]
 
-                if last_char == char:
-                    if rule['mods'][case] == u'.':
-                        continue
+                    if last_char == char:
+                        if rule['mods'][case] == u'.':
+                            continue
 
-                    return self.__apply_rule(rule['mods'], name, case)
+                        return self.__apply_rule(rule['mods'], name, case)
 
         return name
 
-    def __check_excludes(self, name, case, name_form):
+    def __check_excludes(self, name, case, name_form, gender = 'androgynous'):
         if not (name_form in self.data
                 and self.data[name_form].get('exceptions', None)):
             return False
@@ -99,8 +103,9 @@ class Petrovich(object):
         lower = name.lower()
 
         for rule in self.data[name_form]['exceptions']:
-            if lower in rule['test']:
-                return self.__apply_rule(rule['mods'], name, case)
+            if (rule['gender'] == gender) or (rule['gender'] == 'androgynous'):
+                if lower in rule['test']:
+                    return self.__apply_rule(rule['mods'], name, case)
 
         return False
 
