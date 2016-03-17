@@ -1,1 +1,1 @@
-include petrovich/data/rules.json
+include petrovich/rules/rules.json

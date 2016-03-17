@@ -1,6 +1,7 @@
 # coding: utf-8
-import json
 import os
+import json
+from petrovich.enums import Gender
 
 __author__ = 'damirazo <me@damirazo.ru>'
 
@@ -8,7 +9,7 @@ __author__ = 'damirazo <me@damirazo.ru>'
 # Текущая директория
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 # Путь до файла с правилами округления
-RULES_PATH = os.path.join(CURRENT_PATH, 'data', 'rules.json')
+RULES_PATH = os.path.join(CURRENT_PATH, 'rules', 'rules.json')
 
 
 class Petrovich(object):
@@ -25,7 +26,7 @@ class Petrovich(object):
         self.data = json.load(fp)
         fp.close()
 
-    def firstname(self, value, case, gender = 'androgynous'):
+    def firstname(self, value, case, gender=Gender.ANDRGN):
         u"""
         Склонение имени
 
@@ -38,7 +39,7 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'firstname', gender)
 
-    def lastname(self, value, case, gender = 'androgynous'):
+    def lastname(self, value, case, gender=Gender.ANDRGN):
         u"""
         Склонение фамилии
 
@@ -51,7 +52,7 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'lastname', gender)
 
-    def middlename(self, value, case, gender = 'androgynous'):
+    def middlename(self, value, case, gender=Gender.ANDRGN):
         u"""
         Склонение отчества
 
@@ -64,7 +65,7 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'middlename', gender)
 
-    def __inflect(self, value, case, name_form, gender = 'androgynous'):
+    def __inflect(self, value, case, name_form, gender=Gender.ANDRGN):
         excludes = self.__check_excludes(value, case, name_form, gender)
         if excludes:
             return excludes
@@ -81,7 +82,7 @@ class Petrovich(object):
         else:
             return self.__find_rules(value, case, name_form, gender)
 
-    def __find_rules(self, name, case, name_form, gender = 'androgynous'):
+    def __find_rules(self, name, case, name_form, gender=Gender.ANDRGN):
         for rule in self.data[name_form]['suffixes']:
             if (rule['gender'] == gender) or (rule['gender'] == 'androgynous'):
                 for char in rule['test']:
@@ -95,9 +96,9 @@ class Petrovich(object):
 
         return name
 
-    def __check_excludes(self, name, case, name_form, gender = 'androgynous'):
-        if not (name_form in self.data
-                and self.data[name_form].get('exceptions', None)):
+    def __check_excludes(self, name, case, name_form, gender=Gender.ANDRGN):
+        if not (name_form in self.data and
+                self.data[name_form].get('exceptions', None)):
             return False
 
         lower = name.lower()

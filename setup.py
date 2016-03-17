@@ -6,8 +6,8 @@ __author__ = 'damirazo <me@damirazo.ru>'
 
 setup(
     name='Petrovich',
-    version='0.1.1',
-    description=u'Библиотека для склонения кириллических ФИО к нужному падежу',
+    version='0.1.5',
+    description=u'Библиотека для склонения кириллических ФИО по падежам',
     url='https://github.com/damirazo/petrovich',
     author='damirazo',
     author_email='me@damirazo.ru',

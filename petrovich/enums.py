@@ -24,3 +24,15 @@ class Case(object):
         CASE_INSTRUMENTAL,
         CASE_PREPOSITIONAL,
     )
+
+
+class Gender(object):
+    u"""
+    Перечисление родов
+    """
+    # Мужской род
+    MALE = 'male'
+    # Женский род
+    FEMALE = 'female'
+    # Средний род
+    ANDRGN = 'androgynous'
