@@ -4,6 +4,10 @@
 Порт с [ruby](https://github.com/petrovich/petrovich-ruby) библиотеки на python
 
 
+#### Установка
+`pip install petrovich`
+
+
 #### Описание
 
 Перед использованием модуля требуется создать экземпляр класса Petrovich.
