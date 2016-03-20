@@ -58,3 +58,5 @@ target/
 
 # IDE
 .idea/
+
+petrovich/rules/*

@@ -1,7 +1,6 @@
 # coding: utf-8
 import os
 import json
-from petrovich.enums import Gender
 
 __author__ = 'damirazo <me@damirazo.ru>'
 
@@ -9,7 +8,7 @@ __author__ = 'damirazo <me@damirazo.ru>'
 # Текущая директория
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 # Путь до файла с правилами округления
-RULES_PATH = os.path.join(CURRENT_PATH, 'rules', 'rules.json')
+DEFAULT_RULES_PATH = os.path.join(CURRENT_PATH, 'rules', 'rules.json')
 
 
 class Petrovich(object):
@@ -17,16 +16,25 @@ class Petrovich(object):
     Основной класс для склонения кириллических ФИО
     """
 
-    def __init__(self):
-        if not os.path.exists(RULES_PATH):
-            raise IOError(
-                'File with rules {} does not exists!'.format(RULES_PATH))
+    def __init__(self, rules_path=None):
+        u"""
+        :param rules_path: Путь до файла с правилами.
+            В случае отсутствия будет взят путь по умолчанию,
+            указанный в `DEFAULT_RULES_PATH`
+        :return:
+        """
+        if rules_path is None:
+            rules_path = DEFAULT_RULES_PATH
 
-        fp = open(RULES_PATH)
-        self.data = json.load(fp)
-        fp.close()
+        if not os.path.exists(rules_path):
+            raise IOError((
+                'File with rules {} does not exists!'
+            ).format(rules_path))
 
-    def firstname(self, value, case, gender=Gender.ANDRGN):
+        with open(DEFAULT_RULES_PATH, 'r') as fp:
+            self.data = json.load(fp)
+
+    def firstname(self, value, case, gender=None):
         u"""
         Склонение имени
 
@@ -39,7 +47,7 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'firstname', gender)
 
-    def lastname(self, value, case, gender=Gender.ANDRGN):
+    def lastname(self, value, case, gender=None):
         u"""
         Склонение фамилии
 
@@ -52,7 +60,7 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'lastname', gender)
 
-    def middlename(self, value, case, gender=Gender.ANDRGN):
+    def middlename(self, value, case, gender=None):
         u"""
         Склонение отчества
 
@@ -65,12 +73,12 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'middlename', gender)
 
-    def __inflect(self, value, case, name_form, gender=Gender.ANDRGN):
+    def __inflect(self, value, case, name_form, gender=None):
         excludes = self.__check_excludes(value, case, name_form, gender)
         if excludes:
             return excludes
 
-        if (value.count('-') > 0) and (name_form != 'middlename'):
+        if value.count('-') > 0 and name_form != 'middlename':
             value_segments = value.split(u'-')
             result = u''
 
@@ -82,21 +90,25 @@ class Petrovich(object):
         else:
             return self.__find_rules(value, case, name_form, gender)
 
-    def __find_rules(self, name, case, name_form, gender=Gender.ANDRGN):
+    def __find_rules(self, name, case, name_form, gender=None):
         for rule in self.data[name_form]['suffixes']:
-            if (rule['gender'] == gender) or (rule['gender'] == 'androgynous'):
-                for char in rule['test']:
-                    last_char = name[len(name) - len(char): len(name)]
+            # Если род указан и он не совпадает с текущим, то пропускаем
+            # В противном случае проверяем соответствие
+            if gender is not None and rule['gender'] != gender:
+                continue
 
-                    if last_char == char:
-                        if rule['mods'][case] == u'.':
-                            continue
+            for char in rule['test']:
+                last_char = name[len(name) - len(char): len(name)]
 
-                        return self.__apply_rule(rule['mods'], name, case)
+                if last_char == char:
+                    if rule['mods'][case] == u'.':
+                        continue
+
+                    return self.__apply_rule(rule['mods'], name, case)
 
         return name
 
-    def __check_excludes(self, name, case, name_form, gender=Gender.ANDRGN):
+    def __check_excludes(self, name, case, name_form, gender=None):
         if not (name_form in self.data and
                 self.data[name_form].get('exceptions', None)):
             return False
@@ -104,13 +116,16 @@ class Petrovich(object):
         lower = name.lower()
 
         for rule in self.data[name_form]['exceptions']:
-            if (rule['gender'] == gender) or (rule['gender'] == 'androgynous'):
-                if lower in rule['test']:
-                    return self.__apply_rule(rule['mods'], name, case)
+            if gender is not None and rule['gender'] != gender:
+                continue
+
+            if lower in rule['test']:
+                return self.__apply_rule(rule['mods'], name, case)
 
         return False
 
-    def __apply_rule(self, mods, name, case):
+    @staticmethod
+    def __apply_rule(mods, name, case):
         result = name[:len(name) - mods[case].count('-')]
         result += mods[case].replace(u'-', u'')
 

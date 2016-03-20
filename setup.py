@@ -6,7 +6,7 @@ __author__ = 'damirazo <me@damirazo.ru>'
 
 setup(
     name='Petrovich',
-    version='0.1.5',
+    version='1.0.0',
     description=u'Библиотека для склонения кириллических ФИО по падежам',
     url='https://github.com/damirazo/petrovich',
     author='damirazo',
@@ -20,6 +20,7 @@ setup(
         'Natural Language :: Russian',
         'Programming Language :: Python :: 2.7',
     ],
-    keywords='petrovich python',
+    keywords='petrovich python declension initials russian language',
     packages=find_packages(),
+    include_package_data=True,
 )

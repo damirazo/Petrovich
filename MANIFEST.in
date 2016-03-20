@@ -1,1 +1,6 @@
-include petrovich/rules/rules.json
+include *.md
+include *.png
+include LICENSE
+recursive-include petrovich *.md
+recursive-include petrovich *.yml
+recursive-include petrovich *.json

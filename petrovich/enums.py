@@ -7,22 +7,22 @@ class Case(object):
     Перечисление падежей
     """
     # Родительный
-    CASE_GENITIVE = 0
+    GENITIVE = 0
     # Дательный
-    CASE_DATIVE = 1
+    DATIVE = 1
     # Винительный
-    CASE_ACCUSATIVE = 2
+    ACCUSATIVE = 2
     # Творительный
-    CASE_INSTRUMENTAL = 3
+    INSTRUMENTAL = 3
     # Предложный
-    CASE_PREPOSITIONAL = 4
+    PREPOSITIONAL = 4
 
     CASES = (
-        CASE_DATIVE,
-        CASE_GENITIVE,
-        CASE_ACCUSATIVE,
-        CASE_INSTRUMENTAL,
-        CASE_PREPOSITIONAL,
+        DATIVE,
+        GENITIVE,
+        ACCUSATIVE,
+        INSTRUMENTAL,
+        PREPOSITIONAL,
     )
 
 
