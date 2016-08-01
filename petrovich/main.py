@@ -15,6 +15,8 @@ class Petrovich(object):
     u"""
     Основной класс для склонения кириллических ФИО
     """
+    # Разделители
+    separators = (u"-", u" ")
 
     def __init__(self, rules_path=None):
         u"""
@@ -31,7 +33,7 @@ class Petrovich(object):
                 'File with rules {} does not exists!'
             ).format(rules_path))
 
-        with open(DEFAULT_RULES_PATH, 'r') as fp:
+        with open(rules_path, 'r') as fp:
             self.data = json.load(fp)
 
     def firstname(self, value, case, gender=None):
@@ -73,19 +75,37 @@ class Petrovich(object):
 
         return self.__inflect(value, case, 'middlename', gender)
 
+    def __split_name(self, name):
+        u"""
+        Разделяет имя на сегменты по разделителям в self.separators
+        :param name: имя
+        :return: разделённое имя вместе с разделителями
+        """
+        def gen(name, separators):
+            if len(separators) == 0:
+                yield name
+            else:
+                segments = name.split(separators[0])
+                for subsegment in gen(segments[0], separators[1:]):
+                    yield subsegment
+                for segment in segments[1:]:
+                    for subsegment in gen(segment, separators[1:]):
+                        yield separators[0]
+                        yield subsegment
+
+        return gen(name, self.separators)
+
     def __inflect(self, value, case, name_form, gender=None):
         excludes = self.__check_excludes(value, case, name_form, gender)
         if excludes:
             return excludes
 
-        if value.count('-') > 0 and name_form != 'middlename':
-            value_segments = value.split(u'-')
-            result = u''
-
-            for segment in value_segments:
-                result += self.__find_rules(segment, case, name_form, gender)
-
-            return result[:len(result) - 1]
+        segments = list(self.__split_name(value))
+        if len(segments) > 1:
+            result = [(self.__find_rules(segment, case, name_form, gender)
+                      if (segment and (segment not in self.separators)) else segment)
+                      for segment in segments]
+            return u"".join(result)
 
         else:
             return self.__find_rules(value, case, name_form, gender)
