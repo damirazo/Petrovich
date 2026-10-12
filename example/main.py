@@ -1,17 +1,16 @@
-# coding: utf-8
 from petrovich.enums import Case, Gender
 from petrovich.main import Petrovich
 
-__author__ = 'damirazo <me@damirazo.ru>'
+__author__ = "damirazo <me@damirazo.ru>"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     rows = [
-        (u'Алексеев', u'Алексей', u'Давыдович'),
-        (u'Матвеев', u'Денис', u'Евгеньевич'),
-        (u'Алимова', u'Алия', u'Маратовна'),
-        (u'Ткач', u'Валентина', u'Петровна', Gender.FEMALE),
-        (u'Ткач', u'Валентин', u'Петрович', Gender.MALE),
+        ("Алексеев", "Алексей", "Давыдович"),
+        ("Матвеев", "Денис", "Евгеньевич"),
+        ("Алимова", "Алия", "Маратовна"),
+        ("Ткач", "Валентина", "Петровна", Gender.FEMALE),
+        ("Ткач", "Валентин", "Петрович", Gender.MALE),
     ]
 
     petro = Petrovich()
@@ -27,8 +26,8 @@ if __name__ == '__main__':
             raise ValueError
 
         for case in Case.CASES:
-            print(u'{} {} {}'.format(
-                petro.lastname(fname, case, gender),
-                petro.firstname(iname, case, gender),
-                petro.middlename(oname, case, gender),
-            ))
+            print(
+                f"{petro.lastname(fname, case, gender)} "
+                f"{petro.firstname(iname, case, gender)} "
+                f"{petro.middlename(oname, case, gender)}"
+            )

@@ -1,0 +1,67 @@
+stages: [test, build, publish]
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+
+default:
+  image: python:3.12-slim
+  before_script:
+    - python -m pip install --disable-pip-version-check -e '.[dev]'
+
+quality:
+  stage: test
+  script:
+    - ruff check .
+    - ruff format --check .
+    - mypy
+
+tests:
+  stage: test
+  parallel:
+    matrix:
+      - PYTHON_VERSION: ['3.12', '3.13', '3.14']
+  image: python:${PYTHON_VERSION}-slim
+  script:
+    - python -m pytest --cov=petrovich --cov-branch --cov-fail-under=90 --cov-report=term-missing --cov-report=xml:reports/coverage.xml --junitxml=reports/junit.xml
+  artifacts:
+    when: always
+    reports:
+      junit: reports/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: reports/coverage.xml
+
+build:
+  stage: build
+  script:
+    - python scripts/ci_version.py
+    - python -m build
+    - python -m twine check --strict dist/*
+    - python -m venv /tmp/petrovich-wheel
+    - /tmp/petrovich-wheel/bin/pip install dist/*.whl
+    - /tmp/petrovich-wheel/bin/python -m petrovich rules validate
+    - /tmp/petrovich-wheel/bin/python -c "from petrovich import Petrovich, Case; assert Petrovich().firstname('Иван', Case.GENITIVE) == 'Ивана'"
+  artifacts:
+    paths: [dist/]
+    expire_in: 30 days
+
+publish:pypi:
+  stage: publish
+  before_script:
+    - python -m pip install 'twine>=6,<7'
+  variables:
+    TWINE_USERNAME: __token__
+    TWINE_NON_INTERACTIVE: '1'
+  environment:
+    name: pypi
+  resource_group: pypi
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v([2-9]|[1-9][0-9]+)\.[0-9]+\.[0-9]+((a|b|rc)[0-9]+)?$/ && $CI_COMMIT_REF_PROTECTED == "true"'
+  script:
+    - python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+  dependencies: [build]

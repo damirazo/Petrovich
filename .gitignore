@@ -59,4 +59,9 @@ target/
 # IDE
 .idea/
 
-petrovich/rules/*
+.venv*/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+reports/
+.artifacts/
