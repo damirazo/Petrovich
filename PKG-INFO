@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: Petrovich
+Version: 1.0.0
+Summary: Библиотека для склонения кириллических ФИО по падежам
+Home-page: https://github.com/damirazo/petrovich
+Author: damirazo
+Author-email: me@damirazo.ru
+License: MIT
+Description: UNKNOWN
+Keywords: petrovich python declension initials russian language
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Localization
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: Russian
+Classifier: Programming Language :: Python :: 2.7

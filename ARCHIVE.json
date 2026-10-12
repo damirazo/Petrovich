@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "branch": "legacy/1.0.0",
+  "tag": "v1.0.0",
+  "artifact": "Petrovich-1.0.0.tar.gz",
+  "url": "https://files.pythonhosted.org/packages/13/7a/5ee291a3a14376d9f75396b2d44adcda1c06c9836ff3b3c8143a5b055b1b/Petrovich-1.0.0.tar.gz",
+  "sha256": "664924d6682418484fb1b85153e35eb1520360bd8863beb364b2f19521c9c74e",
+  "kind": "sdist snapshot",
+  "files": {
+    "Petrovich.egg-info/top_level.txt": "802aa755b0da78ddd920772398670eba46c2d08bdaa9b90dbe24356ba6a6411c",
+    "Petrovich.egg-info/SOURCES.txt": "a5402267fd3e8a069cc0b6e8da36e8a5ceabfd4d9da0b64b6d63d46481138b83",
+    "Petrovich.egg-info/PKG-INFO": "253722616d463b1b33b9d08746a0ff3162644f45085242b7c2509e23d2de8e1a",
+    "Petrovich.egg-info/dependency_links.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "LICENSE": "f174eabd27b1cd6e569a3bc676af6a403d57e177c02e7646b9d74863a2a62c85",
+    "petrovich/__init__.py": "4773e9ec394d76560d68e39fff107a18d9d3b52f3d23168fe10d51e652c03886",
+    "petrovich/enums.py": "5cf33c83744b76a7898b06a8a3c99e123069fbfc9af216b49ae8b6c5f220306c",
+    "petrovich/main.py": "c1b6564be30a9d1ef1c05d65d2329e8ffa715f2580eea6608add94d994f23142",
+    "petrovich/rules/rules.json": "b2cfede517488d5524de8ddf68a750f169c26450f9ef60792e6c8563f2cfb47f",
+    "petrovich/rules/README.md": "fc99293130adf5f8edb5083ad0240b1728d0edf6e9708062c6d69954348bd0d2",
+    "petrovich/rules/rules.yml": "e343ca8564be6c296f3886593a2d58dcbf37f82333904779e3564996116fa28e",
+    "README.md": "d4999dcfc1322710ef80a0a6b4a8066bdb0e575193dbf5b130735a29380134a1",
+    "petrovich.png": "68f3bac003295115f57a8879b9141d83720484e74220612bf09874c0f23df49f",
+    "example/__init__.py": "4773e9ec394d76560d68e39fff107a18d9d3b52f3d23168fe10d51e652c03886",
+    "example/main.py": "678fdfd54936340c81bf1241b3daeb45fbaea016102cb86fc851d08d3a781dd8",
+    "MANIFEST.in": "d1f8f850ca1f542d636a2e1df4317558a3a155a92155a20e6e9763cb2b96895e",
+    "setup.cfg": "063d04b462ef73e9d86e0b0ae49c4321b51984444a5a2a90aece1e0082b488ee",
+    "setup.py": "fd3d1f84a4f844bc00e4dff0be5af7abeadeef0a84c2c1d490ae114dc5d2ab1b",
+    "PKG-INFO": "253722616d463b1b33b9d08746a0ff3162644f45085242b7c2509e23d2de8e1a",
+    "tests/__init__.py": "4773e9ec394d76560d68e39fff107a18d9d3b52f3d23168fe10d51e652c03886",
+    "tests/simple.py": "aff5a000a4d2444ca88757d968482bf3c2e60a4a21a529882ceb52930a9273ee"
+  }
+}
