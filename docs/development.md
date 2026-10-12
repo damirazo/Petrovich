@@ -15,7 +15,7 @@ Runtime использует только стандартную библиот�
 Это адаптация Git flow с сохранением запрошенного имени ветки разработки.
 
 Рабочие ветки `feature/*` создавайте от `petrovich_2`, вливайте через pull request.
-Для подготовки 2.0 создайте `release/2.0` от `petrovich_2`. В release-ветке
+Для подготовки 3.0 создайте `release/3.0` от `petrovich_2`. В release-ветке
 допускаются исправления, обновление документации и версии, без новых функций.
 После релиза влейте изменения в `main` и обратно в `petrovich_2`.
 Срочные исправления делайте в `hotfix/*` от соответствующего тега и вливайте
@@ -24,12 +24,12 @@ Runtime использует только стандартную библиот�
 Версия хранится в `pyproject.toml`. `scripts/ci_version.py` проверяет её:
 
 - Обычные ветки собираются с версией из файла.
-- `release/2.0` с базой `2.0.0` или `2.0.0.dev0` даёт артефакт
-  `2.0.0.dev<N>`, где N — номер запуска GitHub Actions или `CI_PIPELINE_IID`
-  в GitLab. Для базы `2.0.1` получается `2.0.1.dev<N>`.
-- Тег `v2.0.0` требует точного совпадения с версией `2.0.0` в файле.
-- Разрешены предварительные релизы: `v2.0.0rc1`, `v2.0.0a1`, `v2.0.0b1`.
-- Версии 1.x новой сборкой не публикуются.
+- `release/3.0` с базой `3.0.0` или `3.0.0.dev0` даёт артефакт
+  `3.0.0.dev<N>`, где N — номер запуска GitHub Actions или `CI_PIPELINE_IID`
+  в GitLab. Для базы `3.0.1` получается `3.0.1.dev<N>`.
+- Тег `v3.0.0` требует точного совпадения с версией `3.0.0` в файле.
+- Разрешены предварительные релизы: `v3.0.0rc1`, `v3.0.0a1`, `v3.0.0b1`.
+- Legacy-релизы 1.x и 2.x сохраняются в PyPI; новая линейка — 3.x. Скрипт версий также поддерживает будущие релизные ветки.
 
 Release-ветки создают скачиваемые wheel/sdist, но не публикуют их в PyPI.
 Публикация запускается автоматически только для защищённого тега новой версии
@@ -50,18 +50,18 @@ Workflow `.github/workflows/ci.yml` запускает тесты на Python 3.
 4. В настройках существующего проекта Petrovich на PyPI добавьте GitHub
    Trusted Publisher: owner `damirazo`, repository `Petrovich`, workflow
    `ci.yml`, environment `pypi`. Постоянный API-токен для GitHub не нужен.
-5. Подготовьте `release/2.0`, установите версию `2.0.0` в `pyproject.toml`,
-   дождитесь зелёной сборки и отправьте тег `v2.0.0` на проверенный коммит.
+5. Подготовьте `release/3.0`, установите версию `3.0.0` в `pyproject.toml`,
+   дождитесь зелёной сборки и отправьте тег `v3.0.0` на проверенный коммит.
 
 ```sh
-git switch -c release/2.0 petrovich_2
-# Подготовьте и проверьте релиз, установите version = "2.0.0".
+git switch -c release/3.0 petrovich_2
+# Подготовьте и проверьте релиз, установите version = "3.0.0".
 git add pyproject.toml
-git commit -m "Prepare 2.0.0 release"
-git push origin release/2.0
+git commit -m "Prepare 3.0.0 release"
+git push origin release/3.0
 # После зелёного pipeline:
-git tag -a v2.0.0 -m "Petrovich 2.0.0"
-git push origin v2.0.0
+git tag -a v3.0.0 -m "Petrovich 3.0.0"
+git push origin v3.0.0
 ```
 
 Push `petrovich_2` не публикует пакет. Неподходящие версии и несовпадение тега
@@ -86,14 +86,14 @@ Push `petrovich_2` не публикует пакет. Неподходящие 
    затем создайте и отправьте соответствующий тег.
 
 ```sh
-git switch -c release/2.0 petrovich_2
-# Подготовьте и проверьте релиз, установите version = "2.0.0".
+git switch -c release/3.0 petrovich_2
+# Подготовьте и проверьте релиз, установите version = "3.0.0".
 git add pyproject.toml
-git commit -m "Prepare 2.0.0 release"
-git push gitlab release/2.0
+git commit -m "Prepare 3.0.0 release"
+git push gitlab release/3.0
 # После зелёного pipeline:
-git tag -a v2.0.0 -m "Petrovich 2.0.0"
-git push gitlab v2.0.0
+git tag -a v3.0.0 -m "Petrovich 3.0.0"
+git push gitlab v3.0.0
 ```
 
 Сборка проверяет метаданные через `twine check --strict`, устанавливает wheel
