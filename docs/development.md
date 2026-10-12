@@ -14,7 +14,7 @@ Runtime использует только стандартную библиот�
 `master` остаётся исторической веткой, `legacy/1.x` — линией сопровождения 1.x.
 Это адаптация Git flow с сохранением запрошенного имени ветки разработки.
 
-Рабочие ветки `feature/*` создавайте от `petrovich_2`, вливайте через merge request.
+Рабочие ветки `feature/*` создавайте от `petrovich_2`, вливайте через pull request.
 Для подготовки 2.0 создайте `release/2.0` от `petrovich_2`. В release-ветке
 допускаются исправления, обновление документации и версии, без новых функций.
 После релиза влейте изменения в `main` и обратно в `petrovich_2`.
@@ -25,7 +25,8 @@ Runtime использует только стандартную библиот�
 
 - Обычные ветки собираются с версией из файла.
 - `release/2.0` с базой `2.0.0` или `2.0.0.dev0` даёт артефакт
-  `2.0.0.dev<CI_PIPELINE_IID>`. Для базы `2.0.1` получается `2.0.1.dev<N>`.
+  `2.0.0.dev<N>`, где N — номер запуска GitHub Actions или `CI_PIPELINE_IID`
+  в GitLab. Для базы `2.0.1` получается `2.0.1.dev<N>`.
 - Тег `v2.0.0` требует точного совпадения с версией `2.0.0` в файле.
 - Разрешены предварительные релизы: `v2.0.0rc1`, `v2.0.0a1`, `v2.0.0b1`.
 - Версии 1.x новой сборкой не публикуются.
@@ -34,7 +35,41 @@ Release-ветки создают скачиваемые wheel/sdist, но не 
 Публикация запускается автоматически только для защищённого тега новой версии
 после успешных тестов и сборки. Push ветки разработки не выпускает релиз.
 
-## Настройка GitLab и PyPI
+## Настройка GitHub и PyPI
+
+Основной репозиторий: https://github.com/damirazo/Petrovich.
+Workflow `.github/workflows/ci.yml` запускает тесты на Python 3.12–3.14,
+собирает wheel/sdist и сохраняет их как артефакт `distributions`.
+Публикация использует тот же артефакт после успешных тестов и сборки.
+
+1. Включите GitHub Actions в репозитории. Ветка разработки — `petrovich_2`.
+2. Настройте rulesets для `petrovich_2`, `main`, `release/*`, `legacy/*`.
+   Для тегов `v*` создайте активный ruleset с ограничением права создания
+   релизных тегов. Задание публикации требует `github.ref_protected == true`.
+3. Создайте окружение GitHub `pypi`, разрешите deployment только из тегов `v*`.
+4. В настройках существующего проекта Petrovich на PyPI добавьте GitHub
+   Trusted Publisher: owner `damirazo`, repository `Petrovich`, workflow
+   `ci.yml`, environment `pypi`. Постоянный API-токен для GitHub не нужен.
+5. Подготовьте `release/2.0`, установите версию `2.0.0` в `pyproject.toml`,
+   дождитесь зелёной сборки и отправьте тег `v2.0.0` на проверенный коммит.
+
+```sh
+git switch -c release/2.0 petrovich_2
+# Подготовьте и проверьте релиз, установите version = "2.0.0".
+git add pyproject.toml
+git commit -m "Prepare 2.0.0 release"
+git push origin release/2.0
+# После зелёного pipeline:
+git tag -a v2.0.0 -m "Petrovich 2.0.0"
+git push origin v2.0.0
+```
+
+Push `petrovich_2` не публикует пакет. Неподходящие версии и несовпадение тега
+с `pyproject.toml` останавливают сборку. Без настроенного Trusted Publisher
+публикация не пройдёт. Повторно загружать одну версию нельзя — выпускайте patch.
+См. [PyPI Trusted Publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/).
+
+## Альтернативная настройка GitLab и PyPI
 
 1. Подключите существующий проект GitLab и Docker runner для официальных
    образов `python:3.12-slim`, `3.13-slim`, `3.14-slim`.
@@ -74,5 +109,5 @@ git push gitlab v2.0.0
 Выберите и просмотрите коммит в `petrovich/petrovich-rules`.
 Вызовите `petrovich rules update --output src/petrovich/data/rules.json --ref SHA`.
 Обновите `DEFAULT_REF` и `data/PROVENANCE.json` (commit, url, sha256), сохраните
-лицензию источника, запустите тесты и оформите отдельный merge request.
+лицензию источника, запустите тесты и оформите отдельный pull request.
 Обновление пользовательского файла не меняет встроенный снимок пакета.

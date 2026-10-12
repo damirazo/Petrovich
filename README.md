@@ -116,8 +116,9 @@ python -m build
 python -m twine check --strict dist/*
 ```
 
-GitLab CI проверяет Python 3.12, 3.13 и 3.14, собирает wheel/sdist и публикует
-релизные теги в PyPI. Настройка доступа и Git flow описаны в
+GitHub Actions проверяет Python 3.12, 3.13 и 3.14, собирает wheel/sdist и публикует
+защищённые релизные теги в PyPI через Trusted Publishing. Также сохранена
+конфигурация GitLab CI. Настройка доступа и Git flow описаны в
 [docs/development.md](docs/development.md).
 
 Лицензия кода и правил — MIT.

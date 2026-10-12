@@ -1,4 +1,4 @@
-"""Derive a PEP 440 version from GitLab's release ref before building."""
+"""Derive a PEP 440 version from CI refs (GitLab or mapped GitHub variables)."""
 
 import os
 import re
