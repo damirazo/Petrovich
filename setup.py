@@ -13,7 +13,7 @@ setup(
     author_email='me@damirazo.ru',
     license='MIT',
     classifiers=[
-        'Development Status :: 5',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Localization',
         'License :: OSI Approved :: MIT License',
