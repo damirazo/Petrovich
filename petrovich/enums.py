@@ -1,11 +1,5 @@
-# coding: utf-8
-__author__ = 'damirazo <me@damirazo.ru>'
-
-
-class Case(object):
-    u"""
-    Перечисление падежей
-    """
+class Case:
+    """Перечисление падежей"""
     # Родительный
     GENITIVE = 0
     # Дательный
@@ -26,10 +20,8 @@ class Case(object):
     )
 
 
-class Gender(object):
-    u"""
-    Перечисление родов
-    """
+class Gender:
+    """Перечисление родов"""
     # Мужской род
     MALE = 'male'
     # Женский род

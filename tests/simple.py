@@ -1,9 +1,6 @@
-# coding: utf-8
 from unittest import TestCase
 from petrovich.enums import Case, Gender
 from petrovich.main import Petrovich
-
-__author__ = 'damirazo <me@damirazo.ru>'
 
 
 class PetrovichTestCase(TestCase):
@@ -13,19 +10,37 @@ class PetrovichTestCase(TestCase):
         cls.p = Petrovich()
 
     def test_1(self):
-        self.assertEqual(self.p.firstname(u'Дамир', Case.GENITIVE), u'Дамира')
+        self.assertEqual(
+            self.p.firstname('Дамир', Case.GENITIVE, gender=Gender.MALE),
+            'Дамира'
+        )
 
     def test_2(self):
-        self.assertEqual(self.p.lastname(u'Абдуллин', Case.PREPOSITIONAL), u'Абдуллине')
+        self.assertEqual(
+            self.p.lastname('Абдуллин', Case.PREPOSITIONAL, Gender.MALE),
+            'Абдуллине'
+        )
 
     def test_3(self):
-        self.assertEqual(self.p.lastname(u'Каримова', Case.DATIVE), u'Каримовой')
+        self.assertEqual(
+            self.p.lastname('Каримова', Case.DATIVE, Gender.FEMALE),
+            'Каримовой'
+        )
 
     def test_4(self):
-        self.assertEqual(self.p.middlename(u'Васильевич', Case.DATIVE), u'Васильевичу')
+        self.assertEqual(
+            self.p.middlename('Васильевич', Case.DATIVE, gender=Gender.MALE),
+            'Васильевичу'
+        )
 
     def test_5(self):
-        self.assertEqual(self.p.lastname(u'Ткач', Case.GENITIVE, gender=Gender.FEMALE), u'Ткач')
+        self.assertEqual(
+            self.p.lastname('Ткач', Case.GENITIVE, gender=Gender.FEMALE),
+            'Ткач'
+        )
 
     def test_6(self):
-        self.assertEqual(self.p.lastname(u'Ткач', Case.GENITIVE, gender=Gender.MALE), u'Ткача')
+        self.assertEqual(
+            self.p.lastname('Ткач', Case.GENITIVE, gender=Gender.MALE),
+            'Ткача'
+        )

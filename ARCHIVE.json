@@ -1,0 +1,29 @@
+{
+  "version": "2.0.1",
+  "branch": "legacy/2.0.1",
+  "tag": "v2.0.1",
+  "artifact": "Petrovich-2.0.1-py3-none-any.whl",
+  "url": "https://files.pythonhosted.org/packages/04/b9/58b45874563e1015925436796235fbaf196947f86d7a441a500e2ea02ef8/Petrovich-2.0.1-py3-none-any.whl",
+  "sha256": "d7901a43c6aa3cdedc288eecd0d7e7a061aadb162c7d5d352411c25aec48e288",
+  "kind": "wheel snapshot",
+  "files": {
+    "example/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "example/main.py": "81186eb27ce70eb7737e5600d3881b51cafbe802acb52880bcd9ec57b4d21adb",
+    "petrovich/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "petrovich/enums.py": "11491f6bacb8dcab39ecc8e21aaf8abe94f8b84804dfd6a7c5d51e0414697b97",
+    "petrovich/main.py": "f6785c87137a8430bdc77911b8580a9bf4e6491c76fb8ba7399cde31c99bb84f",
+    "petrovich/rules/.travis.yml": "3cb3d06f58b5879a8b009dc23130f4ceeed6c993143910c1c854e886ff952936",
+    "petrovich/rules/README.md": "84bac774da10f53def09ac5e9b72484ea9a44aedade7110d56be284f89917a1b",
+    "petrovich/rules/gender.json": "02c5db318152abbc184e62074b14920f8c778f751702e7def2220f95bb8515b4",
+    "petrovich/rules/gender.yml": "b0c8c7ef27cd51eb99e3cf38842f693a90075e3b17fbb3e0f894bad9d46149d2",
+    "petrovich/rules/rules.json": "17b3546ad93b63c63d1db1d3538599308cd4a0bd35a54fd30dcd90f7829b56a8",
+    "petrovich/rules/rules.yml": "0211ab2e24fc180d46a71156880c7b97f7ba3ed461bbefdd71a7978de7eec0b1",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/simple.py": "19cb5132f16a7912f9257caeb09e5bde0551794cded4e5e4f16b9f81471c778f",
+    "Petrovich-2.0.1.dist-info/LICENSE": "6fc48fa9f6b5ffc3ed179383ea9ae439972fcfa719344e5e4fa11e0e9cc445b1",
+    "Petrovich-2.0.1.dist-info/METADATA": "56c603012c432e3a06e01e35ea1f654ac24e4edf20907d2fcc12e533356a6f38",
+    "Petrovich-2.0.1.dist-info/WHEEL": "11546323af45e6a5639bf620a9c4d73e74c0bf705f494af4595007b923f75e8a",
+    "Petrovich-2.0.1.dist-info/top_level.txt": "802aa755b0da78ddd920772398670eba46c2d08bdaa9b90dbe24356ba6a6411c",
+    "Petrovich-2.0.1.dist-info/RECORD": "d1220280fb79a4de54b54ea3c2c99ed6ad52b035ce3c27e58bb1365d9bc9d4ed"
+  }
+}
