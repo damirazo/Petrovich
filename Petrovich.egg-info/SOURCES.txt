@@ -1,0 +1,14 @@
+MANIFEST.in
+setup.py
+Petrovich.egg-info/PKG-INFO
+Petrovich.egg-info/SOURCES.txt
+Petrovich.egg-info/dependency_links.txt
+Petrovich.egg-info/top_level.txt
+example/__init__.py
+example/main.py
+petrovich/__init__.py
+petrovich/enums.py
+petrovich/main.py
+petrovich/data/rules.json
+tests/__init__.py
+tests/simple.py

@@ -6,7 +6,7 @@ __author__ = 'damirazo <me@damirazo.ru>'
 
 setup(
     name='Petrovich',
-    version='0.1.1',
+    version='0.1.3',
     description=u'Библиотека для склонения кириллических ФИО к нужному падежу',
     url='https://github.com/damirazo/petrovich',
     author='damirazo',
@@ -22,4 +22,8 @@ setup(
     ],
     keywords='petrovich python',
     packages=find_packages(),
+    include_package_data=True,
+    package_data={
+        '': ['data/rules.json'],
+    },
 )
