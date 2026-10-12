@@ -1,0 +1,27 @@
+{
+  "version": "0.1.1",
+  "branch": "legacy/0.1.1",
+  "tag": "v0.1.1",
+  "artifact": "Petrovich-0.1.1.zip",
+  "url": "https://files.pythonhosted.org/packages/92/a9/3f5a7514a206a9e27b9e846f5bb8e79857efb3a982160ada015ab1c15454/Petrovich-0.1.1.zip",
+  "sha256": "435256314908871f6dcb5ab413b049d6868cc0847d58334d3684d965bec7b93a",
+  "kind": "sdist snapshot",
+  "files": {
+    "MANIFEST.in": "80493377910850d6fd3aeec4d2660d43dfaaff1b856afda19ff550a32078f475",
+    "PKG-INFO": "e98ef44ae1992f2531d8cbc310481d2fd4d5171fdab490396a69262baa9b2a23",
+    "setup.cfg": "99192542277a52e339892cbe3e86d685a7a3d365edd37de6edb9ac4fcf8a23af",
+    "setup.py": "7ec06ce2123e41a82694d5baa780350112bc2228730dfc452155794c879ddc52",
+    "example/main.py": "76b18a72b07e49bd7948b2eaf7699df97cea11dd81802318552eff38f0c66ff1",
+    "example/__init__.py": "4773e9ec394d76560d68e39fff107a18d9d3b52f3d23168fe10d51e652c03886",
+    "petrovich/enums.py": "9f5f10682c7322393195a8ed552a12ede508ff4a0ecc73c40ed87917270f86b4",
+    "petrovich/main.py": "a69343152469c9b4603855fef0818c9b53fe864cd15270b7a6afdec36a37ed2e",
+    "petrovich/__init__.py": "4773e9ec394d76560d68e39fff107a18d9d3b52f3d23168fe10d51e652c03886",
+    "petrovich/data/rules.json": "5698e84613f650dbb7b76eb21a6dc8072fcef54cbe452a43460343b5cf3351bc",
+    "Petrovich.egg-info/dependency_links.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "Petrovich.egg-info/PKG-INFO": "e98ef44ae1992f2531d8cbc310481d2fd4d5171fdab490396a69262baa9b2a23",
+    "Petrovich.egg-info/SOURCES.txt": "a091140fb1a5ac0973a867aa6e41d163bdbfbbc82689fa9efca2c577898f9528",
+    "Petrovich.egg-info/top_level.txt": "802aa755b0da78ddd920772398670eba46c2d08bdaa9b90dbe24356ba6a6411c",
+    "tests/simple.py": "4a0521b39208dab81b577898f37e56298479d72c76d2abf1f0a44bd1c79daf73",
+    "tests/__init__.py": "4773e9ec394d76560d68e39fff107a18d9d3b52f3d23168fe10d51e652c03886"
+  }
+}
