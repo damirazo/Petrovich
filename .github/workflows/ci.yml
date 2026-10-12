@@ -2,10 +2,10 @@ name: Tests, build and PyPI
 
 on:
   push:
-    branches: [petrovich_2, main, 'feature/**', 'release/**', 'hotfix/**']
+    branches: [develop, main, 'feature/**', 'release/**', 'hotfix/**']
     tags: ['v*']
   pull_request:
-    branches: [petrovich_2, main, 'release/**']
+    branches: [develop, main, 'release/**']
   workflow_dispatch:
 
 permissions:
