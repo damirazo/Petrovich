@@ -1,4 +1,6 @@
-# <img src="petrovich.png" alt="Логотип Petrovich" width="48"> Petrovich
+# Petrovich
+
+![Логотип Petrovich](petrovich.png)
 
 Склонение русских имён, фамилий и отчеств по падежам. Python 3.12 и новее.
 Библиотека использует [общие правила Petrovich](https://github.com/petrovich/petrovich-rules)
